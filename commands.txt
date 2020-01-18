@@ -88,4 +88,18 @@ cp context.xml /home/ubuntu/apache-tomcat-8.5.50/webapps/manager/META-INF/contex
 
 ========
 
+Maven settings.xml configuration
+vi /usr/share/maven/conf/settings.xml
 
+===
+<server>
+	<id>central</id>
+        <username>admin</username>
+        <password>password</password>
+</server>
+
+<server>
+        <id>snapshots</id>
+        <username>admin</username>
+        <password>password</password>
+</server>
