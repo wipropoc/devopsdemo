@@ -1,0 +1,38 @@
+ - name: Deploy Helloworld
+   hosts: all
+   become: yes
+   tasks:
+      - name: Install PIP
+        apt: 
+             name=python-pip
+             state=present
+
+      - name: Install lxml
+        pip: 
+           name=lxml
+      - name: Stop Tomcat
+        shell : |
+            cd  /home/ubuntu/apache-tomcat-8.5.50/bin
+            /bin/sh shutdown.sh
+            ps -ef | grep tomcat
+            /bin/rm -rf /home/ubuntu/apache-tomcat-8.5.50/webapps/helloworld*
+        become: yes
+
+      - name: downloading the Zip file
+        maven_artifact:
+         group_id: com.mt
+         artifact_id: helloworld
+         extension: war
+         version: "5.2"
+         repository_url: 'http://3.209.53.193:8081/artifactory/helloworld'
+         username: admin
+         password: Devlite@2019
+         dest: '/home/ubuntu/apache-tomcat-8.5.50/webapps/helloworld.war'
+
+
+      - name: Start Tomcat
+        shell : |
+            cd  /home/ubuntu/apache-tomcat-8.5.50/bin
+            ls -lrt ../webapps
+            nohup ./catalina.sh start
+        become: yes
