@@ -45,7 +45,7 @@ unzip sonarqube-7.0.zip
 cd /home/ubuntu/sonarqube-7.0/bin/linux-x86-64
 sh sonar.sh start
 
-URL: http://3.95.173.248:9000/projects
+URL: http://<IP>:9000/projects
 credentials: default: admin/admin
 
 7. install Jfrog Artifactory
@@ -66,7 +66,7 @@ sudo apt install ansible -y
 
 Define the target hosts and credentials:
 	1. add the target host details /etc/ansible/hosts
-		3.95.173.248 ansible_connection=ssh ansible_user=ubuntu ansible_password=<PASSWORD>
+	 <IP> ansible_connection=ssh ansible_user=ubuntu ansible_password=<PASSWORD>
 	2. disable host_key_checking : /etc/ansible/ansible.cfg
             [defaults]
   	    host_key_checking = False
