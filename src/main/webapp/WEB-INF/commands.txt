@@ -1,0 +1,91 @@
+Server: Ubuntu 16.04 Version
+=====
+1. install JAVA
+===
+sudo su
+apt update -y
+apt install -y software-properties-common
+sudo add-apt-repository ppa:openjdk-r/ppa  
+sudo apt-get update -y
+sudo apt-get install openjdk-8-jdk -y
+2. set Environment variables
+====
+echo "JAVA_HOME=	" >> /etc/environment
+echo "PATH=$PATH:\$JAVA_HOME/bin" >> /etc/environment
+source /etc/environment
+3. install Jenkins
+====
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+echo deb https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list
+sudo apt-get update
+sudo apt-get install jenkins
+sudo service jenkins start
+
+4. install git
+===
+sudo apt install git
+
+5.  install maven
+===========
+sudo apt install maven
+MAVEN_HOME=/usr/share/maven
+
+Note: Set Paths
+
+6. Sonarqube
+==
+Note: exit from sudo user by running 'exit' command.
+      Sonarqube cannot be installed as a root user.
+
+source /etc/environment
+cd /home/ubuntu/
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.0.zip
+unzip sonarqube-7.0.zip
+
+cd /home/ubuntu/sonarqube-7.0/bin/linux-x86-64
+sh sonar.sh start
+
+URL: http://3.95.173.248:9000/projects
+credentials: default: admin/admin
+
+7. install Jfrog Artifactory
+==
+sudo su
+wget -c -O- "https://bintray.com/user/downloadSubjectPublicKey?username=jfrog" | sudo apt-key add -
+echo "deb https://bintray.com/artifact/download/jfrog/artifactory-debs trusty main" | sudo tee -a /etc/apt/sources.list.d/artifactory-oss.list
+apt-get update -y
+apt-get install jfrog-artifactory-oss -y
+service artifactory start
+URL: http://<IP>:8081
+
+Default credentials: default: admin/password
+
+8. install Ansible
+==
+sudo apt install ansible -y
+
+Define the target hosts and credentials:
+	1. add the target host details /etc/ansible/hosts
+		3.95.173.248 ansible_connection=ssh ansible_user=ubuntu ansible_password=<PASSWORD>
+	2. disable host_key_checking : /etc/ansible/ansible.cfg
+            [defaults]
+  	    host_key_checking = False
+        3. place your playbook in some folder  add the artifactory details.
+
+
+9. install  tomcat
+==
+wget http://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.50/bin/apache-tomcat-8.5.50.tar.gz -P /tmp
+tar xf /tmp/apache-tomcat-8.5.50.tar.gz -C /home/ubuntu
+
+cd /home/ubuntu/apache-tomcat-8.5.50/bin
+sh startup.sh
+
+go to the folder where custom tomcat-users.xml, context.xml files present 
+
+cp tomcat-users.xml /home/ubuntu/apache-tomcat-8.5.50/tomcat-users.xml
+cp context.xml /home/ubuntu/apache-tomcat-8.5.50/webapps/manager/META-INF/context.xml
+
+========
+
+
