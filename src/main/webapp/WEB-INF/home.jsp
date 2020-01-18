@@ -19,8 +19,8 @@
 </head>
 
 <body bgcolor="lightgray">
-<h1 bgcolor="white" align="center">Welcome to Wipro</h1>
-<img  align="centre" src="wipro.png" height="300" weight="8" />
+<h1 bgcolor="white" align="center">Welcome to DevLite</h1>
+
 <h3>Wipro's "Cloud Migration Studio" is a unique model to deliver throttled migration for different workloads while reducing risks.</h3>
 <hr>
 <p align=center>Wipro Technologies - 	Digital Strategy, Business Consulting and IT Services.</p>
