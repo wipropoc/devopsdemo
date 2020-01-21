@@ -19,7 +19,7 @@
 </head>
 
 <body bgcolor="lightgray">
-<h1 bgcolor="white" align="center">Welcome to DevLite</h1>
+<h1 bgcolor="white" align="center">Welcome to Wipro Devops Demo</h1>
 
 <h3>Wipro's "Cloud Migration Studio" is a unique model to deliver throttled migration for different workloads while reducing risks.</h3>
 <hr>
