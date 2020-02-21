@@ -1,0 +1,14 @@
+namespace:
+  name: helloworld-namespace
+
+image:
+  name: docker.io/basha16an/hotelapp
+
+deployment:
+  name: helloworld-helm-deployment
+  replicas: 2
+
+service:
+  name: helloworld-helm-service
+  port: 8080
+
