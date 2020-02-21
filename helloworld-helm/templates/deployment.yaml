@@ -1,0 +1,43 @@
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.namespace.name }}
+
+---
+
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+   name: {{ .Values.deployment.name }}
+   namespace: {{ .Values.namespace.name }}
+spec:
+   replicas: {{ .Values.deployment.replicas }}
+   template:
+     metadata:
+       labels:
+         app: devlite
+     spec:
+       containers:
+       - name: devlite-hellworld
+         image: {{ .Values.image.name }}
+         ports:
+           - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+   name: {{ .Values.service.name }}
+   namespace: {{ .Values.namespace.name }}
+spec:
+  selector:
+    app: devlite
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.service.port }}
+  type: LoadBalancer
